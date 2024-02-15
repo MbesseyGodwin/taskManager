@@ -23,14 +23,14 @@ const FeedbackForm = () => {
   };
 
   return (
-    <div className="bg-gray-300 my-3 p-3 fixed-bottom w-full">
-      <button className="btn btn-outline-info" onClick={toggleFormVisibility}>
-        {showForm ? "Hide Feedback Form" : "Provide Feedback"}
+    <div className={`${showForm ? 'bg-gray-300 mt-3 p-3 fixed-bottom w-25' : 'my-3 p-3 fixed-bottom'}`}>
+      <button className="btn btn-info" onClick={toggleFormVisibility}>
+        {showForm ? "Hide Form" : "Feedback"}
       </button>
       {showForm && (
         <form onSubmit={handleSubmit}>
           <label>We would love to hear your feedback:</label>
-          <textarea
+          <textarea required
             className="form-control my-2"
             value={feedback}
             onChange={handleFeedbackChange}

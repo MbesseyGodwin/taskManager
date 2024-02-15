@@ -38,7 +38,7 @@ const App = () => {
   const handleLogin = async () => {
     try {
       // Show loading feedback
-      setLoading("Logging in. Please wait...");
+      setLoading("validating. Please wait...");
   
       const response = await axios.post(`${BASE_URL}/login`, {
         username,
@@ -59,7 +59,7 @@ const App = () => {
     } catch (error) {
       console.error("Error logging in:", error);
       // Alert the user if an error occurs during login
-      setLoading("An error occurred while logging in. Please try again later.");
+      setLoading("An error occurred while logging in. Please check your credentials and try again.");
     }
   };
   
@@ -198,7 +198,7 @@ const App = () => {
     return (
       <div className="container flex flex-col items-center justify-center h-screen">
       <h1 className="text-3xl text-uppercase font-bold my-1">Task Manager Application</h1>
-      <p className="text-uppercase font-bold my-1 alert alert-danger" role="alert">{loading}</p>
+      <p className="text-uppercase font-bold my-1 alert alert-success" role="alert">{loading}</p>
 
       {/* Login Accordion */}
       <div className="w-full my-1">
@@ -234,7 +234,9 @@ const App = () => {
         <h1 className="text-3xl text-center font-bold mt-14 mb-2">Task Manager Dashboard</h1>
       </div>
       <TaskForm onSubmit={handleAddTask} />
-      <TaskList tasks={tasks} />
+      {/* <TaskList tasks={tasks} /> */}
+      <TaskList tasks={tasks} fetchTasks={fetchTasks} />
+
       <FeedbackForm />
     </div>
   );
