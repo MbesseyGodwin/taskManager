@@ -1,0 +1,29 @@
+Functionality of the Application (What it can do):
+
+1.User Registration and Authentication
+2.Allow users to register and create an account.
+3.Provide user authentication and secure login functionality.
+4.Display a user-specific dashboard upon successful login.
+5.Show relevant information and data based on user preferences.
+6.Enable users to create, update, and delete content (tasks).
+7.Implement a search feature to allow users to find specific content.
+8.Enable filtering and sorting options for search results.
+9.Handle API requests and responses securely and efficiently.
+10.Provide notifications to users for important events or updates
+11.Form Handling and Validation
+12.Forms for user input have both client-side and server-side validation.
+13.Ensure appropriate error handling and error messages.
+14.Allow users to provide feedback and reviews via email.
+15.Users can also report issues or suggest improvements. 
+16.Implement security measures to protect against common web application vulnerabilities (e.g., cross-site scripting, SQL injection).
+17.Ensure secure data storage and transmission.
+
+Additions
+1. add notifications when the user is registering, 
+2. add validations for registering
+3. suggest strong password
+4. let the user know if the passowrd they have is weak
+
+5. in the dashboard after login, the user should get a notification for loading when fetching the data from the API
+
+6. add functionality to chech if internet is connected or not

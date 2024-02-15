@@ -17,6 +17,23 @@ const App = () => {
 
   const [loading, setLoading] = useState("sign-in");
 
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+  useEffect(() => {
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
+
+  const buttonStyle = isOnline ? "alert alert-success btn btn-success uppercase rounded-none fixed w-full" : "alert alert-danger btn btn-danger uppercase rounded-none fixed w-full";
+
   const BASE_URL = "http://localhost:5000";
 
   const handleRegister = async () => {
@@ -230,16 +247,18 @@ const App = () => {
   return (
     <div className="">
       <div className="d-grid">
-        <button className="btn btn-danger rounded-none fixed w-full" onClick={handleLogout}>Logout</button>
+      <button className={buttonStyle} onClick={handleLogout}>
+        {isOnline ? "Logout (Online)" : "Logout (Offline)"}
+      </button>
         <h1 className="text-3xl text-center font-bold mt-14 mb-2">Task Manager Dashboard</h1>
       </div>
       <TaskForm onSubmit={handleAddTask} />
       {/* <TaskList tasks={tasks} /> */}
       <TaskList tasks={tasks} fetchTasks={fetchTasks} />
-
+  
       <FeedbackForm />
     </div>
   );
-};
-
-export default App;
+  };
+  
+  export default App;

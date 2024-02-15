@@ -103,8 +103,8 @@ const TaskList = ({ tasks, fetchTasks }) => {
                 <td className="border px-6 py-4"><DateFormatter dateString={task.created_at} /></td>
                 <td className="border px-6 py-4"><DateFormatter dateString={task.updated_at} /></td>
                 <td className="border d-flex justify-content-around text-center px-6 py-4">
-                  <button className="btn btn-outline-primary mr-2" onClick={() => openModal(task)}>Edit</button>
-                  <button className="btn btn-outline-danger" onClick={() => handleDeleteTask(task.id)}>Delete</button>
+                  <button className="btn btn-outline-primary uppercase" onClick={() => openModal(task)}>Edit</button>
+                  <button className="btn btn-outline-danger uppercase" onClick={() => handleDeleteTask(task.id)}>Delete</button>
                 </td>
               </tr>
             ))}

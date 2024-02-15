@@ -24,8 +24,8 @@ const FeedbackForm = () => {
 
   return (
     <div className={`${showForm ? 'bg-gray-300 mt-3 p-3 fixed-bottom w-25' : 'my-3 p-3 fixed-bottom'}`}>
-      <button className="btn btn-info" onClick={toggleFormVisibility}>
-        {showForm ? "Hide Form" : "Feedback"}
+      <button className="btn btn-info uppercase" onClick={toggleFormVisibility}>
+        {showForm ? "Dismiss" : "Feedback"}
       </button>
       {showForm && (
         <form onSubmit={handleSubmit}>
@@ -35,7 +35,7 @@ const FeedbackForm = () => {
             value={feedback}
             onChange={handleFeedbackChange}
           />
-          <button className="btn btn-outline-primary" type="submit">
+          <button className="btn btn-outline-primary uppercase" type="submit">
             Send Feedback
           </button>
         </form>
