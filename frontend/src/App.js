@@ -38,24 +38,31 @@ const App = () => {
 
   const handleRegister = async () => {
     try {
+      setLoading("validating. Please wait...");
+  
       const response = await axios.post(`${BASE_URL}/register`, {
         username,
         password,
       });
-      if (response.status === 200) {
+  
+      if (response.status === 201 || response.status === 200) {
+        setLoading(`User ${username} registered successfully.`);
         console.log("User registered successfully");
       } else {
-        console.error("Error registering user");
+        setLoading("Error registering user");
+        console.error("Error registering user:", response.data.message);
       }
     } catch (error) {
-      console.error("Error registering user:", error);
+      setLoading("User registration failed");
+      console.error("Error registering user:", error.message);
     }
   };
+  
 
   const handleLogin = async () => {
     try {
       // Show loading feedback
-      setLoading("validating. Please wait...");
+      setLoading("Authenticating User. Please wait...");
   
       const response = await axios.post(`${BASE_URL}/login`, {
         username,

@@ -7,14 +7,20 @@ const { body, validationResult } = require("express-validator");
 const authenticateUser = require("./authMiddleware");
 const errorHandler = require("./errorHandler");
 const cors = require("cors");
+// Import dotenv and configure
+require('dotenv').config();
+
+// Accessing environment variables
+const connectionString = process.env.DB_CONNECTION_STRING;
+const jwtSecret = process.env.JWT_SECRET;
+
 
 // Create an Express application
 const app = express();
 
 // Set up a PostgreSQL connection pool
 const pool = new Pool({
-  connectionString:
-    "postgres://cse340:nvyyeIRktU4hJB7yq2TeiIe0WlBv1swr@dpg-cmkp3i6n7f5s73bae080-a.oregon-postgres.render.com/cse340_uoj2",
+  connectionString: connectionString,
   ssl: true, // enabled
   rejectUnauthorized: false,
 });
@@ -26,8 +32,7 @@ app.use(express.json());
 app.use(cors());
 
 // Route for user registration
-app.post(
-  "/register",
+app.post("/register",
   [
     // Validate username and password
     body("username").notEmpty().isLength({ min: 3 }),
@@ -80,7 +85,7 @@ app.post("/login", async (req, res) => {
     }
 
     // Generate JWT token
-    const token = jwt.sign({ id: user.rows[0].id }, "25bbe05fe41e374147858bf738274b0b1fea6f9879c06236da96a81e01d6236cc2e639b1108d84f66d89fb4502858166e6f2ad8280d68a6da250f9371d6e7d1e", {
+    const token = jwt.sign({ id: user.rows[0].id }, jwtSecret, {
       expiresIn: "2h",
     });
 

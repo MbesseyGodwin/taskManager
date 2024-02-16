@@ -3,21 +3,40 @@ import axios from 'axios';
 import DateFormatter from './DateFormatter';
 
 const TaskList = ({ tasks, fetchTasks }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editedTask, setEditedTask] = useState({ id: null, title: '', description: '', status: '' });
-  const [searchQuery, setSearchQuery] = useState('');
-  const [loading, setLoading] = useState('');
+  // State variables
+  const [isModalOpen, setIsModalOpen] = useState(false); // State for controlling modal open/close
+  const [editedTask, setEditedTask] = useState({ id: null, title: '', description: '', status: '' }); // State for edited task
+  const [searchQuery, setSearchQuery] = useState(''); // State for search query
+  const [loading, setLoading] = useState(''); // State for loading message
+  const [isOnline, setIsOnline] = useState(navigator.onLine); // State for online/offline status
 
+  // Effect hook to listen for online/offline events
+  useEffect(() => {
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
+
+  // Function to open the modal and set the edited task
   const openModal = (task) => {
     setIsModalOpen(true);
     setEditedTask(task);
   };
 
+  // Function to close the modal and reset edited task state
   const closeModal = () => {
     setIsModalOpen(false);
     setEditedTask({ id: null, title: '', description: '', status: '' });
   };
 
+  // Function to handle editing a task
   const handleEditTask = async () => {
     try {
       setLoading("editing task");
@@ -34,12 +53,13 @@ const TaskList = ({ tasks, fetchTasks }) => {
     }
   };
   
-
+  // Function to handle input change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setEditedTask({ ...editedTask, [name]: value });
   };
 
+  // Function to handle deleting a task
   const handleDeleteTask = async (taskId) => {
     try {
       setLoading("deleting task");
@@ -55,8 +75,7 @@ const TaskList = ({ tasks, fetchTasks }) => {
     }
   };
   
-
-
+  // Filtered tasks based on search query
   const filteredTasks = tasks.filter(task =>
     task.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     task.description.toLowerCase().includes(searchQuery.toLowerCase())
@@ -68,8 +87,10 @@ const TaskList = ({ tasks, fetchTasks }) => {
         {isModalOpen ? "Editing Task" : "List of Tasks"}
       </h3>
 
+      {/* Loading message */}
       {loading && <p className='alert alert-success'>{loading}</p>}
 
+      {/* Search input */}
       <div className="mb-3">
         <input
           type="text"
@@ -80,6 +101,7 @@ const TaskList = ({ tasks, fetchTasks }) => {
         />
       </div>
 
+      {/* Table of tasks */}
       {!isModalOpen && (
         <table className="table table-bordered rounded">
           <thead>
@@ -94,6 +116,21 @@ const TaskList = ({ tasks, fetchTasks }) => {
             </tr>
           </thead>
           <tbody>
+
+            {/* No tasks found or offline message */}
+            {filteredTasks.length === 0 && !loading && (
+              <tr>
+                <td className="border" colSpan="7">
+                  {
+                    isOnline ? 
+                    <p className="alert alert-success text-center uppercase">No task found</p> : 
+                    <p className="alert alert-danger text-center uppercase">data not fetched, you are offline</p>
+                  }
+                </td>
+              </tr>
+            )}
+
+            {/* Render tasks */}
             {filteredTasks.map(task => (
               <tr key={task.id} className="bg-white">
                 <td className="border px-6 py-4">{task.id}</td>
@@ -112,6 +149,7 @@ const TaskList = ({ tasks, fetchTasks }) => {
         </table>
       )}
 
+      {/* Modal for editing task */}
       {isModalOpen && (
         <div className="shadow-2xl">
           <div className="modal-content bg-gray-200 p-3">
