@@ -1,0 +1,65 @@
+Task Manager App Documentation
+
+Timeline:
+
+Week 3: Brainstorming of Web Application Ideas.
+Week 4: Project Proposal.
+Week 5: Project Setup.
+Week 6: Project Build.
+Week 7: Project Final Build and Deployment.
+
+Application Specifications - Required Technology:
+
+Front-End: HTML, CSS, Tailwind/Bootstrap, JavaScript, React/Next.js.
+Back-End: Node.js, Express, JWT, Database (Postgres).
+Project Management: Azure DevOps Boards.
+Code Management: Azure DevOps Repo.
+Deployment / Cloud Platform: Render.
+
+Functionality of the Application (What it can do):
+
+User Registration and Authentication:
+Allow users to register and create an account securely.
+Implement user authentication for secure login functionality.
+
+Dashboard Display:
+Upon successful login, display a personalized dashboard for each user.
+Show relevant information and data based on user preferences and activities.
+
+Task Management:
+Enable users to create, update, and delete tasks within the application.
+Implement robust search functionality to allow users to find specific tasks easily.
+
+Filtering and Sorting:
+Provide filtering and sorting options for search results, enhancing user experience.
+
+API Handling:
+Handle API requests and responses securely and efficiently, ensuring data integrity.
+
+Notifications:
+Send notifications to users for important events or updates within the application.
+
+Form Handling and Validation:
+Implement both client-side and server-side validation for user input forms.
+Ensure appropriate error handling and messaging for better user experience.
+
+Feedback and Reporting:
+Allow users to provide feedback, reviews, or report issues via email.
+Implement measures to address user suggestions and improve application functionality.
+
+Security Measures:
+Implement security measures to protect against common web application vulnerabilities, such as cross-site scripting and SQL injection.
+Ensure secure storage and transmission of user data to maintain confidentiality and integrity.
+
+Testing:
+
+Unit Testing:
+Conducted unit tests to verify individual components' functionality.
+
+Integration Testing:
+Performed integration testing to ensure seamless interaction between different application components.
+
+Documentation:
+Documented all aspects of the project, including installation and usage instructions.
+Provided detailed documentation for the application, outlining its features and functionalities.
+Included a comprehensive README file with a description of the project and its components.
